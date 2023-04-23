@@ -87,7 +87,13 @@ class UserViewSet(viewsets.ModelViewSet):
     def subscribe(self, request, pk=None):
         user = request.user
         following = get_object_or_404(User, pk=pk)
+        follow = Follow.objects.filter(user=user, following=following)
         if request.method == 'POST':
+            if follow.exists():
+                return Response(
+                    {'detail': 'Вы уже подписаны!'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
             queryset = Follow.objects.create(
                 following=following, user=user
             )
@@ -96,5 +102,8 @@ class UserViewSet(viewsets.ModelViewSet):
                 context={'request': request}
             )
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        Follow.objects.filter(pk=pk).delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        follow.delete()
+        return Response(
+            {'detail': 'Подписка удалена'},
+            status=status.HTTP_204_NO_CONTENT
+        )
