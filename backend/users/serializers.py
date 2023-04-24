@@ -34,12 +34,7 @@ class SubscriptionsSerializer(serializers.ModelSerializer):
         )
 
     def get_is_subscribed(self, obj):
-        request = self.context.get('request')
-        if request is None or request.user.is_anonymous:
-            return 0
-        return Follow.objects.filter(
-            user=request.user, following=obj
-        ).exists()
+        return obj.id in self.context['subscriptions']
 
     def get_recipes_count(self, obj):
         return obj.recipe.count()

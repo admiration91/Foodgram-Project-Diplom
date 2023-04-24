@@ -20,6 +20,21 @@ class UserViewSet(viewsets.ModelViewSet):
     pagination_class = None
     permission_classes = (AllowAny,)
 
+    def get_serializer_context(self):
+        context = super().get_serializer_context()
+        context.update(
+            {
+                'request': self.request,
+                'subscriptions': set(
+                    Follow.objects.filter(
+                        user=self.request.user).values_list(
+                            'following_id', flat=True
+                            )
+                        )
+                }
+            )
+        return context
+
     @action(
         methods=['get', 'post'],
         detail=False,
@@ -71,11 +86,7 @@ class UserViewSet(viewsets.ModelViewSet):
         paginator.page_size = 6
         result = paginator.paginate_queryset(followers, request)
         serializer = SubscriptionsSerializer(
-            result, many=True,
-            context={
-                'current_user': user,
-                'request': request
-            }
+            result, many=True, context=self.get_serializer_context()
         )
         return paginator.get_paginated_response(serializer.data)
 
