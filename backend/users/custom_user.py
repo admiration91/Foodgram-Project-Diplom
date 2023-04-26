@@ -21,12 +21,12 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
     def get_is_subscribed(self, obj):
-        request = self.context.get('request')
-        if request is None or request.user.is_anonymous:
-            return 0
-        return Follow.objects.filter(
-            user=request.user, following=obj
-        ).exists()
+        subscribe = self.context.get('request')
+        if subscribe and not subscribe.user.is_anonymous:
+            return Follow.objects.filter(
+                user=subscribe.user, following=obj
+            ).exists()
+        return False
 
 
 class PasswordSerializer(serializers.Serializer):
