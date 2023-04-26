@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'users',
     'recipes',
     'api',
-    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -160,6 +159,5 @@ DJOSER = {
 }
 EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
 
-CORS_ORIGIN_ALLOW_ALL = True
 USERNAME_MAX_LENGTH = 150
 EMAIL_MAX_LENGTH = 254
