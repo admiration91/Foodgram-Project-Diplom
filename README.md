@@ -1,4 +1,7 @@
+[![.github/workflows/yamdb_workflow.yml](https://github.com/admiration91/foodgram-project-react/actions/workflows/main.yml/badge.svg)](https://github.com/admiration91/foodgram-project-react/actions/workflows/main.yml)
 # Foodgram Project
+
+# IP рабочего сервера - 51.250.71.62
 
 ## Описание
 
@@ -45,7 +48,7 @@
 
 Регистрация нового пользователя:
 ```POST
-http://127.0.0.1:8000/api/users/
+http://51.250.71.62//api/users/
 ```
 payload:
 ```application/json
@@ -60,7 +63,7 @@ payload:
 
 Получение токена:
 ```POST
-http://127.0.0.1:8000/api/auth/token/login/
+http://51.250.71.62//api/auth/token/login/
 ```
 payload:
 ```application/json
@@ -74,17 +77,17 @@ payload:
 
 Получение списка рецептов
 ```GET
-http://127.0.0.1:8000/api/recipes/
+http://51.250.71.62//api/recipes/
 ```
 
 Получение конкретного рецепта
 ```GET
-http://127.0.0.1:8000/api/recipes/{id}/
+http://51.250.71.62//api/recipes/{id}/
 ```
 
 Создание рецепта
 ```POST
-http://127.0.0.1:8000/api/recipes/
+http://51.250.71.62//api/recipes/
 ```
 payload:
 ```application/json
@@ -107,48 +110,48 @@ payload:
 ### Тэги
 Получение списка тэгов
 ```GET
-http://127.0.0.1:8000/api/tags/
+http://51.250.71.62//api/tags/
 ```
 
 Получение тэга
 ```GET
-http://127.0.0.1:8000/api/tags/{id}
+http://51.250.71.62//api/tags/{id}
 ```
 
 ### Избранное
 
 Добавить рецепт в избранное
 ```POST
-http://127.0.0.1:8000/api/recipes/{id}/favorite
+http://51.250.71.62//api/recipes/{id}/favorite
 ```
 
 Посмотреть список избранного
 ```GET
-http://127.0.0.1:8000/api/favorites
+http://51.250.71.62//api/favorites
 ```
 
 ### Пользователи
 
 Посмотреть список пользователей
 ```GET
-http://127.0.0.1:8000/api/users/
+http://51.250.71.62//api/users/
 ```
 
 Посмотреть конкретного пользователя
 ```GET
-http://127.0.0.1:8000/api/users/{id}
+http://51.250.71.62//api/users/{id}
 ```
 
 ### Подписки
 
 Подписаться на пользователя
 ```POST
-http://127.0.0.1:8000/api/users/{id}
+http://51.250.71.62//api/users/{id}
 ```
 
 Посмотреть список подписок
 ```GET
-http://127.0.0.1:8000/api/users/subscriptions
+http://51.250.71.62//api/users/subscriptions
 ```
 
 #### Список покупок
