@@ -39,7 +39,7 @@ class SubscriptionsSerializer(serializers.ModelSerializer):
             return 0
         return Follow.objects.filter(
             user=request.user, following=obj
-        ).exists
+        ).exists()
 
     def get_recipes_count(self, obj):
         return obj.recipe.count()
