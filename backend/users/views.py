@@ -27,7 +27,7 @@ class UserViewSet(viewsets.ModelViewSet):
                 'request': self.request,
                 'subscriptions': set(
                     Follow.objects.filter(
-                        user=self.request.user).values_list(
+                        user_id=self.request.user.id).values_list(
                             'following_id', flat=True
                     )
                 )
