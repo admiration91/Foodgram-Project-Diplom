@@ -1,4 +1,5 @@
 import io
+from os import path
 
 from django.http import FileResponse
 from django_filters.rest_framework import DjangoFilterBackend
@@ -53,7 +54,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 'request': self.request,
                 'get_is_favorited': set(
                     Follow.objects.filter(
-                        user=self.request.user
+                        user_id=self.request.user.id
                     ).values_list(
                         'following_id', flat=True
                     )
@@ -205,6 +206,8 @@ class ShoppingCartView(APIView):
 
 @api_view(['GET'])
 def download_shopping_cart(request):
+    app_path = path.realpath(path.dirname(__file__))
+    font_path = path.join(app_path, 'fonts/Roboto-Italic.ttf')
     user = request.user
     shopping_cart = user.shopping_cart.all()
     buying_list = {}
@@ -231,17 +234,17 @@ def download_shopping_cart(request):
         )
     buffer = io.BytesIO()
     pdfmetrics.registerFont(
-        TTFont('Roboto-Italic', 'fonts/Roboto_Italic.ttf')
+        TTFont('Roboto', font_path)
     )
     p = canvas.Canvas(buffer)
     x = 0.4 * inch
     y = 11 * inch
-    p.setFont('Roboto-Italic', 14)
+    p.setFont('Roboto', 14)
     p.drawString(x, y, 'Ваш список покупок сформирован Foodgram:')
     x += 15
     y -= 25
     for item in wishlist:
-        p.setFont('Roboto-Italic', 12)
+        p.setFont('Roboto', 12)
         p.drawString(x, y, item)
         y = y - 15
     p.showPage()
