@@ -54,21 +54,21 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 'request': self.request,
                 'get_is_favorited': set(
                     Follow.objects.filter(
-                        user_id=self.request.user.id
+                        user__id=self.request.user.id
                     ).values_list(
                         'following_id', flat=True
                     )
                 ),
                 'get_is_in_shopping_cart': set(
                     ShoppingCart.objects.filter(
-                        user_id=self.request.user.id
+                        user__id=self.request.user.id
                     ).values_list(
                         'recipe_id', flat=True
                     )
                 ),
                 'subscriptions': set(
                     Follow.objects.filter(
-                        user_id=self.request.user.id).values_list(
+                        user__id=self.request.user.id).values_list(
                             'following_id', flat=True
                     )
                 )
