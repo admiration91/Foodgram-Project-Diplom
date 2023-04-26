@@ -61,14 +61,14 @@ class RecipeViewSet(viewsets.ModelViewSet):
                 ),
                 'get_is_in_shopping_cart': set(
                     ShoppingCart.objects.filter(
-                        user=self.request.user
+                        user_id=self.request.user.id
                     ).values_list(
                         'recipe_id', flat=True
                     )
                 ),
                 'subscriptions': set(
                     Follow.objects.filter(
-                        user=self.request.user).values_list(
+                        user_id=self.request.user.id).values_list(
                             'following_id', flat=True
                     )
                 )
