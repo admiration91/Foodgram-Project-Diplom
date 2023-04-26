@@ -22,7 +22,7 @@ class UserSerializer(serializers.ModelSerializer):
         subscribe = self.context.get('request')
         if subscribe and not subscribe.user.is_anonymous:
             return obj.id in self.context['subscriptions']
-        return
+        return False
 
 
 class PasswordSerializer(serializers.Serializer):
