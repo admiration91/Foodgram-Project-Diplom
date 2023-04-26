@@ -3,7 +3,7 @@ import io
 from django.http import FileResponse
 from django_filters.rest_framework import DjangoFilterBackend
 from recipes.models import (Favorite, Ingredient, IngredientInRecipe, Recipe,
-                            ShoppingCart, Tag, TagInRecipe)
+                            ShoppingCart, Tag)
 from reportlab.lib.units import inch
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -16,6 +16,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from users.models import Follow
+
 from .filters import IngredientFilter, RecipeFilter
 from .serializers import (CreateRecipeSerializer, FavoriteSerializer,
                           IngredientSerializer, ReadRecipeSerializer,
@@ -50,12 +51,6 @@ class RecipeViewSet(viewsets.ModelViewSet):
         context.update(
             {
                 'request': self.request,
-                'tag_update': TagInRecipe.objects.filter(
-                    recipe_id__author=self.request.user
-                ),
-                'ingredient_update': IngredientInRecipe.objects.filter(
-                    recipe_id__author=self.request.user
-                ),
                 'get_is_favorited': set(
                     Follow.objects.filter(
                         user=self.request.user

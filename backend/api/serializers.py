@@ -76,8 +76,8 @@ class CreateRecipeSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         ingredients = validated_data.pop('ingredients')
         tags = validated_data.pop('tags')
-        self.context['tag_update'].delete()
-        self.context['ingredient_update'].delete()
+        TagInRecipe.objects.filter(recipe=instance).delete()
+        IngredientInRecipe.objects.filter(recipe=instance).delete()
         for ingredient in ingredients:
             ingredient_id = ingredient['id']
             amount = ingredient['amount']
