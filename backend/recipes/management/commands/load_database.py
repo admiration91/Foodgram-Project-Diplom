@@ -1,6 +1,7 @@
 import csv
-from recipes.models import Ingredient
+
 from django.core.management.base import BaseCommand
+from recipes.models import Ingredient
 
 
 class Command(BaseCommand):
@@ -14,4 +15,3 @@ class Command(BaseCommand):
                     measurement_unit=line[1]
                 ) for number, line in enumerate(reader)
             ])
-

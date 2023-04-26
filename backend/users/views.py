@@ -29,10 +29,10 @@ class UserViewSet(viewsets.ModelViewSet):
                     Follow.objects.filter(
                         user=self.request.user).values_list(
                             'following_id', flat=True
-                            )
-                        )
-                }
-            )
+                    )
+                )
+            }
+        )
         return context
 
     @action(
