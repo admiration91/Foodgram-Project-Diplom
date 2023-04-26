@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from .models import Follow
+
 User = get_user_model()
 
 
@@ -19,10 +21,12 @@ class UserSerializer(serializers.ModelSerializer):
         )
 
     def get_is_subscribed(self, obj):
-        subscribe = self.context.get('request')
-        if subscribe and not subscribe.user.is_anonymous:
-            return obj.id in self.context['subscriptions']
-        return False
+        request = self.context.get('request')
+        if request is None or request.user.is_anonymous:
+            return 0
+        return Follow.objects.filter(
+            user=request.user, following=obj
+        ).exists()
 
 
 class PasswordSerializer(serializers.Serializer):

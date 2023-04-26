@@ -231,20 +231,17 @@ def download_shopping_cart(request):
         )
     buffer = io.BytesIO()
     pdfmetrics.registerFont(
-        TTFont('TNR', 'times.ttf')
-    )
-    pdfmetrics.registerFont(
-        TTFont('TNRB', 'timesbd.ttf')
+        TTFont('Roboto-Italic', 'fonts/Roboto_Italic.ttf')
     )
     p = canvas.Canvas(buffer)
     x = 0.4 * inch
     y = 11 * inch
-    p.setFont('TNRB', 14)
+    p.setFont('Roboto-Italic', 14)
     p.drawString(x, y, 'Ваш список покупок сформирован Foodgram:')
     x += 15
     y -= 25
     for item in wishlist:
-        p.setFont('TNR', 12)
+        p.setFont('Roboto-Italic', 12)
         p.drawString(x, y, item)
         y = y - 15
     p.showPage()
