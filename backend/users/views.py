@@ -86,7 +86,10 @@ class UserViewSet(viewsets.ModelViewSet):
         paginator.page_size = 6
         result = paginator.paginate_queryset(followers, request)
         serializer = SubscriptionsSerializer(
-            result, many=True, context=self.get_serializer_context()
+            result, many=True, context={
+                'current_user': user,
+                'request': request
+            }
         )
         return paginator.get_paginated_response(serializer.data)
 
