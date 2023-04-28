@@ -10,7 +10,7 @@ class Command(BaseCommand):
             reader = csv.reader(csv_file, delimiter=',')
             Ingredient.objects.bulk_create([
                 Ingredient(
-                    id=number,
+                    id=number + 1,
                     name=line[0],
                     measurement_unit=line[1]
                 ) for number, line in enumerate(reader)
