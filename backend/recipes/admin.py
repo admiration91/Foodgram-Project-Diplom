@@ -72,7 +72,7 @@ class FollowAdmin(admin.ModelAdmin):
     list_display = (
         'id', 'user', 'following'
     )
-    search_fields = ('user')
+    search_fields = ('user',)
     list_filter = ('user', 'following')
     empty_value_display = '---'
 
