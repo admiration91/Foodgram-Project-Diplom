@@ -27,7 +27,7 @@ DATETIME_INPUT_FORMATS += ['%Y-%m-%dT%H:%M:%S.%f%z']
 SECRET_KEY = 'django-insecure-&#i@fxwm4m_6=5q258z%rs(pv9r137@wa*ar%jp5ptn8f2d=!7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
